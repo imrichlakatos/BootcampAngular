@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(private router: Router) {
+  }
+
+  goToAdmin() {
+    const user = {id: 3};
+    // this.router.navigate(['admin', user.id]).catch();
+    this.router.navigateByUrl('admin').catch();
+  }
 }

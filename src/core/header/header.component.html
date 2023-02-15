@@ -3,7 +3,7 @@
     <div class="border-b border-gray-200">
       <div class="flex h-16 items-center">
         <div class="ml-4 flex lg:ml-0">
-<!--          <a [routerLink]="['/home']">-->
+          <a [routerLink]="['home']">
             <div class="h-10 w-10">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="10" y="50" width="80" height="50" fill="#FFC107"/>
@@ -12,21 +12,20 @@
                 <rect x="25" y="70" width="50" height="10" fill="#333"/>
               </svg>
             </div>
-            <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&amp;shade=600" alt=""> -->
-<!--          </a>-->
+          </a>
         </div>
 
         <div class="ml-8 lg:block lg:self-stretch">
           <div class="flex h-full space-x-8 items-center">
-            <a routerLink="/home">Home</a>
-            <a routerLink="/products">Products</a>
-            <a routerLink="/catalogs">Catalogs</a>
+            <a class="color" routerLink="/home" routerLinkActive="text-pink-600">Home</a>
+            <a routerLink="/product" routerLinkActive="text-pink-600">Product</a>
+<!--            <a routerLink="/catalogs" routerLinkActive="text-pink-600">Catalogs</a>-->
           </div>
         </div>
 
         <div class="ml-auto flex items-center">
           <div class="lg:flex lg:flex-1 lg:items-center lg:justify-end space-x-6">
-            <a routerLink="/admin" class="text-sm font-medium text-gray-700 hover:text-gray-800">Admin</a>
+            <button class="text-sm font-medium text-gray-700 hover:text-gray-800" (click)="goToAdmin()">Admin</button>
             <span class="h-6 w-px bg-gray-200"></span>
           </div>
           <div class="ml-4 flow-root lg:ml-6">

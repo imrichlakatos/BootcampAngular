@@ -1,26 +1,30 @@
-<table class="table-fixed">
+<h1 class="text-3xl font-medium my-6">Product List</h1>
+<table class="w-full text-left table-collapse">
   <thead>
-  <tr>
-    <th>Product name</th>
-    <th>Quantity</th>
-    <th>Price</th>
+  <tr class="text-xs font-medium uppercase tracking-wide text-gray-700">
+    <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Product name</th>
+    <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Quantity</th>
+    <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Price</th>
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-    <td>Malcolm Lockyer</td>
-    <td>1961</td>
+  <tr class="text-gray-700">
+    <td class="border-t border-gray-200 px-4 py-3">Product 1</td>
+    <td class="border-t border-gray-200 px-4 py-3">10</td>
+    <td class="border-t border-gray-200 px-4 py-3">$100</td>
   </tr>
-  <tr>
-    <td>Witchy Woman</td>
-    <td>The Eagles</td>
-    <td>1972</td>
+  <tr class="text-gray-700">
+    <td class="border-t border-gray-200 px-4 py-3">Product 2</td>
+    <td class="border-t border-gray-200 px-4 py-3">20</td>
+    <td class="border-t border-gray-200 px-4 py-3">$200</td>
   </tr>
-  <tr>
-    <td>Shining Star</td>
-    <td>Earth, Wind, and Fire</td>
-    <td>1975</td>
+  <tr class="text-gray-700">
+    <td class="border-t border-gray-200 px-4 py-3">Product 3</td>
+    <td class="border-t border-gray-200 px-4 py-3">30</td>
+    <td class="border-t border-gray-200 px-4 py-3">$300</td>
   </tr>
   </tbody>
 </table>
+<section class="flex justify-end mt-6">
+  <button appButton [state]="'secondary'" (click)="order()">Order</button>
+</section>
