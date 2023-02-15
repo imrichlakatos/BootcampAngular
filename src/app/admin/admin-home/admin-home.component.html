@@ -1,0 +1,64 @@
+<!--<h1 class="text-3xl my-6" [ngClass]="{ 'font-medium' : !isBold, 'font-extrabold': isBold }">Admin</h1>-->
+<!--<h1 class="text-3xl my-6" [ngStyle]="{'font-weight': getFontWeight()}" [ngClass]="getIsBold()">Admin</h1>-->
+<h1 *ngIf="getIsBoldBool()" class="text-3xl my-6 font-medium">Admin</h1>
+<h1 *ngIf="!getIsBoldBool()" class="text-3xl my-6 font-extrabold">Admin</h1>
+
+<section>
+  <header class="flex justify-between">
+    <h2 class="text-2xl font-medium my-6">Products</h2>
+    <button appButton state="tertiary" class="self-center" (click)="goToCreateNewProduct()">Add new</button>
+  </header>
+  <table class="w-full text-left table-collapse">
+    <thead>
+    <tr class="text-xs font-medium uppercase tracking-wide text-gray-700">
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Product name</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Description</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Price</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of productList" class="text-gray-700">
+      <td class="border-t border-gray-200 px-4 py-3">{{product.name}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{product.description}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{product.price}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">
+        <button appButton state="primary" (click)="goToEditProduct(product.publicId!)">Edit</button>
+        <button class="ml-3" appButton state='danger' (click)="deleteProduct(product.publicId!)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <header class="flex justify-between">
+    <h2 class="text-2xl font-medium my-6">Catalogs</h2>
+    <a class="flex" routerLink="catalog/new">
+      <button appButton state="tertiary" class="self-center">Add new</button>
+    </a>
+  </header>
+  <table class="w-full text-left table-collapse">
+    <thead>
+    <tr class="text-xs font-medium uppercase tracking-wide text-gray-700">
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">ID</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Name</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Description</th>
+      <th class="px-4 py-3 border-b border-gray-200 bg-gray-100">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let catalog of catalogList | async">
+      <td class="border-t border-gray-200 px-4 py-3">{{catalog.publicId}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{catalog.name}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{catalog.description}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">
+        <a [routerLink]="['catalog', 'edit', catalog.publicId]">
+          <button appButton state='primary'>Edit</button>
+        </a>
+        <button class="ml-3" appButton state='danger' (click)="deleteCatalog(catalog.publicId!)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>

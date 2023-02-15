@@ -1,8 +1,17 @@
 <h1 class="text-3xl font-medium my-6">Product List</h1>
+<div class="relative">
+  <select [(ngModel)]="selectedOption" (ngModelChange)="catalogChanged($event)"
+          class="block appearance-none w-full border border-gray-400 px-4 py-2 pr-8 rounded">
+    <option *ngFor="let catalog of catalogs" [value]="catalog.publicId">{{ catalog.name }}</option>
+  </select>
+  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+    </svg>
+  </div>
+</div>
+
 <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
+  <app-product-card *ngFor="let product of products;" [product]="product"
+                    (productClicked)="goToProduct($event)"></app-product-card>
 </div>

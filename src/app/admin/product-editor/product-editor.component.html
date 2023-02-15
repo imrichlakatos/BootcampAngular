@@ -1,0 +1,61 @@
+<h1 class="text-3xl my-6">{{pageTitle}}</h1>
+<form class="bg-white p-6 rounded-lg" [formGroup]="productFormGroup" (ngSubmit)="submit()">
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="name">Name</label>
+    <input
+      class="w-full border border-gray-400 p-2"
+      type="text"
+      id="name"
+      [formControl]="nameControl"
+    >
+    <p *ngIf="nameControl.invalid && nameControl.touched" class="text-red-500 text-xs italic mt-2">
+      {{getNameValidationMessage()}}
+    </p>
+  </div>
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="price">Price</label>
+    <input
+      class="w-full border border-gray-400 p-2"
+      type="text"
+      id="price"
+      [formControl]="priceControl"
+    >
+    <p *ngIf="priceControl.invalid && priceControl.touched" class="text-red-500 text-xs italic mt-2">
+      Please enter a valid price
+    </p>
+  </div>
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="category">Category</label>
+    <select
+      class="w-full border border-gray-400 p-2"
+      id="category"
+      [formControl]="catalogControl"
+    >
+      <option *ngFor="let catalog of availableCatalogs" [value]="catalog.publicId">{{catalog.name}}</option>
+    </select>
+    <p *ngIf="catalogControl.invalid && catalogControl.touched" class="text-red-500 text-xs italic mt-2">
+      Please select a category
+    </p>
+  </div>
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="description">Description</label>
+    <textarea
+      class="w-full border border-gray-400 p-2"
+      id="description"
+      rows="5"
+      [formControl]="descriptionControl"
+    ></textarea>
+    <p *ngIf="descriptionControl.invalid && descriptionControl.touched" class="text-red-500 text-xs italic mt-2">
+      Description is too long
+    </p>
+  </div>
+  <button
+    class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+
+<!--<pre>{{catalogControl.value | json}}</pre>-->
+<!--<button (click)="setValue()">SetValue</button>-->

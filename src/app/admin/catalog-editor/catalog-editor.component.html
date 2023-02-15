@@ -1,0 +1,46 @@
+<h1 class="text-3xl my-6">{{pageTitle}}</h1>
+<form class="bg-white p-6 rounded-lg" [formGroup]="catalogFormGroup">
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="name">Name</label>
+    <input
+      class="w-full border border-gray-400 p-2"
+      type="text"
+      id="name"
+      formControlName="name"
+    >
+    <p *ngIf="nameControl?.invalid && nameControl?.touched && nameControl?.errors?.['required']"
+       class="text-red-500 text-xs italic mt-2">
+      Name is required
+    </p>
+    <p *ngIf="nameControl?.invalid && nameControl?.touched && nameControl?.errors?.['minlength']"
+       class="text-red-500 text-xs italic mt-2">
+      Name is too short
+    </p>
+  </div>
+  <div class="mb-4">
+    <label class="block font-bold mb-2" for="description">Description</label>
+    <textarea
+      class="w-full border border-gray-400 p-2"
+      id="description"
+      rows="5"
+      formControlName="description"
+    ></textarea>
+    <p *ngIf="descriptionControl?.invalid && descriptionControl?.touched && descriptionControl?.errors?.['required']"
+       class="text-red-500 text-xs italic mt-2">
+      Description required
+    </p>
+    <p *ngIf="descriptionControl?.invalid && descriptionControl?.touched && descriptionControl?.errors?.['maxlength']"
+       class="text-red-500 text-xs italic mt-2">
+      Description is too long
+    </p>
+  </div>
+  <button
+    class="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded"
+    type="submit"
+    (click)="submit()"
+  >
+    Submit
+  </button>
+</form>
+
+<pre>{{catalogFormGroup.value | json}}</pre>

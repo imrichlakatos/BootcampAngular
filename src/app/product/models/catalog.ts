@@ -1,8 +1,8 @@
 import {Product} from "./product";
 
 export interface Catalog {
-  publicId: string;
+  publicId?: string;
   name: string;
   description: string;
-  products: Product[];
+  products?: Product[];
 }

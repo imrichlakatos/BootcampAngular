@@ -1,16 +1,16 @@
 <div class="py-10 px-6 lg:px-8">
-  <h1 class="text-3xl font-medium mb-6">Product Name</h1>
+  <h1 class="text-3xl font-medium mb-6">{{product?.name}}</h1>
   <div class="flex flex-col md:flex-row mb-10">
     <img class="md:w-64 md:h-64 mb-10 md:mr-10" src="https://tailwindui.com/img/ecommerce-images/product-page-01-product-shot-01.jpg" alt="Product Image">
     <div class="flex-1">
-      <p class="text-lg font-medium mb-2">$99.99</p>
+      <p class="text-lg font-medium mb-2">{{product?.price | currency}}</p>
       <p class="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fringilla velit vel velit consectetur, euismod tempor leo luctus.</p>
       <button class="bg-blue-500 text-white px-6 py-3 rounded-full">Add to Cart</button>
     </div>
   </div>
   <div class="mb-10">
     <h2 class="text-xl font-medium mb-4">Product Description</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin fringilla velit vel velit consectetur, euismod tempor leo luctus. Aliquam erat volutpat. Sed consectetur semper tellus, eu gravida nisi tincidunt ac. Nam elementum, mi ac tincidunt congue, odio dolor convallis ante, ut euismod metus justo a elit. Sed euismod, nulla et suscipit gravida, ante sapien efficitur metus, et molestie sapien sapien ac nulla. Sed eget ipsum ut quam blandit aliquam. Praesent et eros est. In hac habitasse platea dictumst. Nam auctor bibendum libero, ac euismod velit malesuada vel. Nulla facilisi.</p>
+    <p>{{product?.description}}</p>
   </div>
   <div>
     <h2 class="text-xl font-medium mb-4">Product Details</h2>
