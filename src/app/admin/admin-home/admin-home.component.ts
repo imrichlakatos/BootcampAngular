@@ -17,9 +17,10 @@ export class AdminHomeComponent implements OnInit {
   catalogList = this.productApiService.getCatalogs().pipe(switchMap((val) => {
     forkJoin(val.map((catalog) => {
       return this.productApiService.getCatalog(catalog.publicId!);
-    })).pipe(map(catalogs => catalogs.map(catalog => catalog.products))).subscribe((products) => {
-      this.productList = products.reduce((acc, val) => acc!.concat(val!), []) ?? [];
-    });
+    })).pipe(map(catalogs => catalogs.map(catalog => catalog.products)))
+      .subscribe((products) => {
+        this.productList = products.reduce((acc, val) => acc!.concat(val!), []) ?? [];
+      });
     return of(val);
   }));
 
@@ -55,12 +56,14 @@ export class AdminHomeComponent implements OnInit {
   deleteProduct(id: string) {
     this.productApiService.deleteProduct(id).subscribe(() => {
       this.productList = this.productList.filter((product) => product.publicId !== id);
+      this.toasterService.show('Congratulations! You deleted a product with ID ' + id);
     });
   }
 
   deleteCatalog(id: string) {
     this.productApiService.deleteCatalog(id).subscribe(() => {
       this.catalogList = this.catalogList.pipe(map((catalogs) => catalogs.filter((catalog) => catalog.publicId !== id)));
+      this.toasterService.show('Congratulations! You deleted a catalog with ID ' + id);
     });
   }
 }

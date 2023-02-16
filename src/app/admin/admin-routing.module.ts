@@ -7,12 +7,10 @@ import {CatalogEditorComponent} from "./catalog-editor/catalog-editor.component"
 
 const routes: Routes = [
   {path: '', component: AdminHomeComponent},
-  {
-    path: 'product', children: [
+  {path: 'product', children: [
       {path: 'new', component: ProductEditorComponent, data: {mode: 'new'}},
       {path: 'edit/:id', component: ProductEditorComponent, data: {mode: 'edit'}},
-    ]
-  },
+    ]},
   {
     path: 'catalog', children: [
       {path: 'new', component: CatalogEditorComponent, data: {mode: 'new'}},

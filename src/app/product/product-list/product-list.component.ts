@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  selectedOption: any;
+  selectedOption: string = 'default';
   catalogs: Catalog[];
   products: Product[];
 
@@ -18,22 +18,26 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAvailableCatalogs();
+      this.getAvailableCatalogs();
   }
 
   getAvailableCatalogs() {
-    this.productApiService.getCatalogs().subscribe((catalogs) => {
+    this.productApiService.getCatalogs()
+        .subscribe((catalogs) => {
       this.catalogs = catalogs;
     });
   }
 
-  catalogChanged($event: any) {
-    this.productApiService.getCatalog($event).subscribe((catalog) => {
+  catalogChanged(id: string) {
+    if (this.selectedOption === 'default') {
+      return;
+    }
+    this.productApiService.getCatalog(id).subscribe((catalog) => {
       this.products = catalog.products!;
     });
   }
 
-  goToProduct(id: string) {
-    this.router.navigateByUrl(`product/${id}`, {state: {product: this.products.find((product) => product.publicId === id)}});
+  goToProduct(product: Product) {
+    this.router.navigateByUrl(`product/${product.publicId}`, {state: {product}});
   }
 }

@@ -19,11 +19,13 @@
     </thead>
     <tbody>
     <tr *ngFor="let product of productList" class="text-gray-700">
-      <td class="border-t border-gray-200 px-4 py-3">{{product.name}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{product.name }}</td>
       <td class="border-t border-gray-200 px-4 py-3">{{product.description}}</td>
-      <td class="border-t border-gray-200 px-4 py-3">{{product.price}}</td>
+      <td class="border-t border-gray-200 px-4 py-3">{{product.price | currency:'EUR'}}</td>
       <td class="border-t border-gray-200 px-4 py-3">
-        <button appButton state="primary" (click)="goToEditProduct(product.publicId!)">Edit</button>
+        <a [routerLink]="['product', 'edit', product.publicId]">
+          <button appButton state="primary">Edit</button>
+        </a>
         <button class="ml-3" appButton state='danger' (click)="deleteProduct(product.publicId!)">Delete</button>
       </td>
     </tr>

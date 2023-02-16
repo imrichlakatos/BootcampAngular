@@ -8,7 +8,6 @@ import {SharedModule} from "../../shared/shared.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { CatalogEditorComponent } from './catalog-editor/catalog-editor.component';
 import { ProductEditorComponent } from './product-editor/product-editor.component';
-import {RouterLink} from "@angular/router";
 
 @NgModule({
   declarations: [

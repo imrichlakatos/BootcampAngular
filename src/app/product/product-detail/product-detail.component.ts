@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from 'rxjs';
 import {ProductApiService} from "../products-api.service";
 import {Product} from "../models/product";
@@ -13,12 +13,21 @@ export class ProductDetailComponent implements OnInit {
   productId: string;
   product: Product | null;
 
-  constructor(private route: ActivatedRoute, private productApiService: ProductApiService) {
+  constructor(private route: ActivatedRoute,
+              private productApiService: ProductApiService) {
   }
 
   ngOnInit() {
-    this.route.paramMap.pipe(switchMap((paramMap) => {
-      return this.productApiService.getProduct(paramMap.get('id')!);
+    // const productId = this.route.snapshot.quer;
+    // this.productApiService.getProduct(productId!).subscribe((product) => {
+    //   this.product = product;
+    // })
+
+    this.route.paramMap
+          .pipe(
+            switchMap((paramMap) => {
+              const productId = paramMap.get('id')!;
+              return this.productApiService.getProduct(productId);
     })).subscribe((product) => {
       this.product = product!;
     });

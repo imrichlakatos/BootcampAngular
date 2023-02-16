@@ -49,7 +49,7 @@ export class CatalogEditorComponent implements OnInit {
 
   submit() {
     if (this.catalogFormGroup.invalid) {
-      this, this.catalogFormGroup.markAllAsTouched();
+      this.catalogFormGroup.markAllAsTouched();
       return;
     }
     if (this.mode === 'new') {

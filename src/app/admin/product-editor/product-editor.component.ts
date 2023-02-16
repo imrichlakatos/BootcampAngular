@@ -16,13 +16,16 @@ export class ProductEditorComponent implements OnInit {
   pageTitle = 'New Product';
   productId: string | null = null;
 
-  nameControl = new FormControl('', {nonNullable: true, validators: [Validators.required, Validators.minLength(3)]});
+  nameControl = new FormControl('Imro',
+    { nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3)]
+    });
   priceControl = new FormControl(0, {
     nonNullable: true,
-    validators: [Validators.pattern("[0-9]+"), Validators.required, Validators.min(1)]
+    validators: [Validators.pattern("[0-9]+"), Validators.required, Validators.min(1)],
   });
   catalogControl = new FormControl('', {nonNullable: true, validators: [Validators.required]});
-  descriptionControl = new FormControl('', {nonNullable: true, validators: [Validators.maxLength(50)]});
+  descriptionControl = new FormControl('', {nonNullable: true, validators: [Validators.maxLength(50)], updateOn: 'change'});
   productFormGroup = new FormGroup({
     name: this.nameControl,
     price: this.priceControl,
@@ -65,6 +68,7 @@ export class ProductEditorComponent implements OnInit {
   }
 
   submit() {
+    console.log(this.productFormGroup);
     if (this.productFormGroup.invalid) {
       this.productFormGroup.markAllAsTouched();
       return;
