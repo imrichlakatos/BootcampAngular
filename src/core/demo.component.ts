@@ -14,6 +14,7 @@ import {
 @Component({
   selector: 'app-lifecycle-hooks-demo',
   template: `
+    <ng-content></ng-content>
     <p>Lifecycle Hooks Demo Component</p>
   `
 })

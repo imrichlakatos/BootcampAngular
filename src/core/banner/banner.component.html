@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center justify-center h-96">
   <h1 class="text-6xl font-bold">Welcome to our store</h1>
-  <h1 class="text-4xl font-bold">Hello, {{username}}</h1>
+  <h2 *ngIf="isLoggedIn" class="text-4xl font-bold">Hello, {{username}}</h2>
   <p class="text-xl">We're happy to have you here!</p>
 </div>

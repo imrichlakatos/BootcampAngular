@@ -29,7 +29,12 @@ export class HeaderComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      const {username, password} = result;
+      let username, password;
+      if (result) {
+        username = result.username;
+        password = result.password;
+      }
+
       if (username && password) {
         this.userService.login(username);
       }

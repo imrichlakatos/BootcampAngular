@@ -1,9 +1,11 @@
 import {Injectable} from "@angular/core";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
+  isLoggedIn$ = new Subject<boolean>();
   username: string | null;
   constructor() {}
 
@@ -11,8 +13,9 @@ export class UserService {
     this.username = username;
     localStorage.setItem("username", username);
     localStorage.setItem("isLoggedIn", String(true));
+    this.isLoggedIn$.next(true);
 
-    return this.username;
+    // return this.username;
   }
 
   isLoggedIn() { // change this to Subject
@@ -27,5 +30,6 @@ export class UserService {
     this.username = null;
     localStorage.removeItem("username");
     localStorage.setItem("isLoggedIn", String(false));
+    this.isLoggedIn$.next(false);
   }
 }

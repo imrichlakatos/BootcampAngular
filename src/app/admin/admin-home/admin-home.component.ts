@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductApiService} from "../../product/products-api.service";
-import {forkJoin, map, of, switchMap} from "rxjs";
+import {forkJoin, map, of, Subscription, switchMap} from "rxjs";
 import {Product} from "../../product/models/product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToasterService} from "../../../shared/toaster/toaster.service";
+import {UserService} from "../../../core/services/user.service";
 
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.scss']
 })
-export class AdminHomeComponent implements OnInit {
+export class AdminHomeComponent implements OnInit, OnDestroy {
   isBold: boolean;
   // buttonState = 'primary';
   productList: Product[];
@@ -24,13 +25,24 @@ export class AdminHomeComponent implements OnInit {
     return of(val);
   }));
 
+  isLoggedInSubscription: Subscription;
   constructor(private productApiService: ProductApiService,
               private router: Router,
               private route: ActivatedRoute,
+              private userService: UserService,
               private toasterService: ToasterService) {
   }
 
   ngOnInit() {
+    this.isLoggedInSubscription = this.userService.isLoggedIn$.subscribe((isLoggedIn) => {
+      if (!isLoggedIn) {
+        this.router.navigateByUrl('home');
+      }
+    });
+  }
+
+  ngOnDestroy() {
+      this.isLoggedInSubscription.unsubscribe();
   }
 
   getIsBold() {
