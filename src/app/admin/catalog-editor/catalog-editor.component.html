@@ -25,7 +25,7 @@
       rows="5"
       formControlName="description"
     ></textarea>
-    <p *ngIf="descriptionControl?.invalid && descriptionControl?.touched && descriptionControl?.errors?.['required']"
+    <p *ngIf="catalogFormGroup.controls['description'].invalid && descriptionControl?.touched && descriptionControl?.errors?.['required']"
        class="text-red-500 text-xs italic mt-2">
       Description required
     </p>
@@ -43,4 +43,4 @@
   </button>
 </form>
 
-<pre>{{catalogFormGroup.value | json}}</pre>
+<pre>{{catalogFormGroup.controls['name'].errors | json}}</pre>

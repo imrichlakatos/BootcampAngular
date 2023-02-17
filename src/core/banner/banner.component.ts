@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-banner',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent {
+  username: string;
+  constructor(private userService: UserService) {
+  }
 
+  ngOnInit() {
+    this.username = this.userService.getUserName()!;
+  }
 }

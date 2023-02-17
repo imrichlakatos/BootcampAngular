@@ -5,6 +5,17 @@ import {FooterComponent} from './footer/footer.component';
 import {BannerComponent} from './banner/banner.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {LoginComponent} from './login/login.component';
+
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {FormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
+
+
+
+import {LifecycleHooksDemoComponent} from "./demo.component";
 
 
 @NgModule({
@@ -12,18 +23,27 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     HeaderComponent,
     FooterComponent,
     BannerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    LifecycleHooksDemoComponent,
   ],
   imports: [
     CommonModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    MatIconModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     BannerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    LifecycleHooksDemoComponent,
   ]
 })
 export class CoreModule {

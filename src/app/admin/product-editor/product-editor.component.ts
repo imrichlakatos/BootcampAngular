@@ -16,7 +16,7 @@ export class ProductEditorComponent implements OnInit {
   pageTitle = 'New Product';
   productId: string | null = null;
 
-  nameControl = new FormControl('Imro',
+  nameControl = new FormControl('',
     { nonNullable: true,
       validators: [Validators.required, Validators.minLength(3)]
     });
@@ -48,10 +48,24 @@ export class ProductEditorComponent implements OnInit {
     if (this.mode === 'edit') {
       this.productId = this.route.snapshot.params['id'];
       this.productService.getProduct(this.productId!).subscribe((product) => {
-        this.nameControl.setValue(product.name);
-        this.priceControl.setValue(product.price);
-        this.descriptionControl.setValue(product.description);
+        this.productFormGroup.setValue({
+          catalog: "",
+          name: product.name,
+          price: product.price,
+          description: product.description
+        });
+
+        this.productFormGroup.patchValue({
+          name: product.name,
+          price: product.price,
+        });
+
+
+        // this.nameControl.setValue(product.name);
+        // this.priceControl.setValue(product.price);
+        // this.descriptionControl.setValue(product.description);
       });
+
     }
   }
 
@@ -68,7 +82,11 @@ export class ProductEditorComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.productFormGroup);
+    console.log(this.productFormGroup.getRawValue());
+    this.productFormGroup.valueChanges.subscribe((val) => {
+      this.pageTitle = 'New Product' + val.name;
+    })
+    console.log(this.productFormGroup.value);
     if (this.productFormGroup.invalid) {
       this.productFormGroup.markAllAsTouched();
       return;
@@ -78,7 +96,7 @@ export class ProductEditorComponent implements OnInit {
       const payload = this.getFormValue();
       this.productService.createProduct(catalogId, payload).subscribe(() => {
         this.toasterService.show('Congratulations! Product created!');
-        this.productFormGroup.reset()
+        this.productFormGroup.reset();
       });
     } else {
       const payload = this.getFormValue();
@@ -91,7 +109,7 @@ export class ProductEditorComponent implements OnInit {
 
   getFormValue() {
     return {
-      name: this.nameControl.value,
+      name: this.nameControl.value, //string
       price: this.priceControl.value,
       description: this.descriptionControl.value,
     }

@@ -12,7 +12,7 @@ import {Catalog} from "../../product/models/catalog";
 })
 export class CatalogEditorComponent implements OnInit {
 
-  pageTitle = 'New Product';
+  pageTitle = 'New Catalog';
   mode: 'new' | 'edit' = 'new';
   catalogId: string | null = null;
 
@@ -21,7 +21,7 @@ export class CatalogEditorComponent implements OnInit {
   }
 
   get descriptionControl() {
-    return this.catalogFormGroup.get('description');
+    return this.catalogFormGroup.controls['name'];
   }
 
   catalogFormGroup = this.formBuilder.group({
@@ -38,11 +38,11 @@ export class CatalogEditorComponent implements OnInit {
 
   ngOnInit() {
     this.mode = this.route.snapshot.data['mode'];
-    this.pageTitle = this.mode === 'new' ? 'New Product' : 'Edit Product';
+    this.pageTitle = this.mode === 'new' ? 'New Catalog' : 'Edit Catalog';
     if (this.mode === 'edit') {
       this.catalogId = this.route.snapshot.params['id'];
-      this.productService.getCatalog(this.catalogId!).subscribe((product) => {
-        this.catalogFormGroup.patchValue(product);
+      this.productService.getCatalog(this.catalogId!).subscribe((catalog) => {
+        this.catalogFormGroup.setValue(catalog);
       });
     }
   }
@@ -62,7 +62,7 @@ export class CatalogEditorComponent implements OnInit {
       const payload = this.catalogFormGroup.value;
       this.productService.updateCatalog(this.catalogId!, <Catalog>payload).subscribe(() => {
         this.toasterService.show('Catalog updated successfully');
-        this.router.navigate(['admin']);
+        this.router.navigate(['admin'])
       });
     }
   }

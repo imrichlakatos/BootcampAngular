@@ -8,6 +8,11 @@ import {ToasterService} from "../shared/toaster/toaster.service";
 })
 export class AppComponent {
   title = 'client';
+  testData: any;
   constructor(private toasterService: ToasterService) {
+  }
+
+  changeInput() {
+    this.testData = new Date().getTime();
   }
 }
